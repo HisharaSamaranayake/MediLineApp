@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.hisharasamaranayake.MediLineApp"
     },
     "web": {
       "bundler": "metro",
@@ -33,10 +34,53 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "notification": {
+      "icon": "./assets/images/icon.png",
+      "color": "#00A1A1",
+      "ios": {
+        "sounds": [
+          {
+            "name": "tone1.wav",
+            "critical": false
+          },
+          {
+            "name": "tone2.wav",
+            "critical": false
+          },
+          {
+            "name": "tone3.wav",
+            "critical": false
+          }
+        ]
+      },
+      "android": {
+        "sounds": [
+          {
+            "name": "tone1",
+            "critical": false
+          },
+          {
+            "name": "tone2",
+            "critical": false
+          },
+          {
+            "name": "tone3",
+            "critical": false
+          }
+        ]
+      }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "59c100e0-5f93-4b3f-8761-84ca5e9911cd"
+      }
     }
   }
 }

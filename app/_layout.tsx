@@ -5,6 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { FontSizeProvider } from './FontSizeContext';  // correct relative path
+
+import useNotificationPermission from './notificationPermission'; // ✅ IMPORT HOOK (adjusted path)
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';  // <-- Import GestureHandlerRootView
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -12,18 +17,25 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  useNotificationPermission(); // ✅ CALL HOOK
+
+  if (!loaded) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>  {/* <-- Wrap everything here */}
+      <FontSizeProvider>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </ThemeProvider>
+      </FontSizeProvider>
+    </GestureHandlerRootView>
   );
 }
+
+
+
+
